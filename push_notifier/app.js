@@ -35,7 +35,7 @@ myApp.controller('mainCtrl', function($scope, $interval) {
       $scope.notification.onclick = function () {
         window.open( theIcon || $scope.icon , 'notification_image');
       };
-
+      
     };
 
     $scope.runInterval = function () {
@@ -44,7 +44,7 @@ myApp.controller('mainCtrl', function($scope, $interval) {
       $interval(function () {
         $scope.notify('Tring Tring!!', "Here's a random picture for you! with ❤️ from interval!", 'http://loremflickr.com/320/240/dog');
       }, 10000, 50);
-      
+
     };
 
 });
