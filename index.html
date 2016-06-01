@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="mainApp">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>notifier</title>
+
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.1.0/octicons.min.css">
+
+    <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+    <style media="screen">
+      .form-group{
+        width: 70%;
+        margin: 0 auto;
+      }
+      body{
+        text-align: center;
+      }
+      h1{
+        width: 50%;
+        margin: 0 auto;
+      }
+    </style>
+  </head>
+  <body ng-controller="mainCtrl">
+
+    <h1 ng-class="{'bg-danger': notificationStatus === 'denied', 'bg-info': notificationStatus === 'granted'}">permission: <small>{{ notificationStatus }}</small></h1>
+
+    <div class="form-group">
+      <input type="text" name="name" ng-model="title" class="form-control" placeholder="title">
+      <input type="url" name="name" ng-model="icon" class="form-control" placeholder="icon URl">
+
+      <textarea name="body" rows="8" cols="40" ng-model="body" class="form-control" placeholder="body"></textarea>
+      <!-- <p>{{ body }}</p> -->
+      <button type="button" name="button" ng-click="notify()" class="btn btn-info" class="form-control">notify the above messsage!</button>
+    </div>
+
+    <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.9/angular.min.js" charset="utf-8"></script>
+    <script src="app.js" charset="utf-8"></script>
+  </body>
+</html>
