@@ -35,7 +35,7 @@ myApp.controller('mainCtrl', function($scope, $interval) {
       $scope.notification.onclick = function () {
         window.open( theIcon || $scope.icon , 'notification_image');
       };
-      
+    
     };
 
     $scope.runInterval = function () {
