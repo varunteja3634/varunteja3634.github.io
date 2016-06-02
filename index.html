@@ -26,11 +26,15 @@
         width: 50%;
         margin: 0 auto;
       }
+      span{
+        margin: .5rem !important;
+      }
     </style>
   </head>
   <body ng-controller="mainCtrl">
 
     <h1 ng-class="{'bg-danger': notificationStatus === 'denied', 'bg-info': notificationStatus === 'granted'}">permission: <small>{{ notificationStatus }}</small></h1>
+    <span class="label label-info">date: {{ date | date }}</span>
 
     <div class="form-group">
       <input type="text" name="name" ng-model="title" class="form-control" placeholder="title">

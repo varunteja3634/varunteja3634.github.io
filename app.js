@@ -4,6 +4,7 @@ myApp.controller('mainCtrl', function($scope, $interval) {
 
 
     $scope.notificationStatus = '';
+    $scope.date = new Date();
 
     $scope.notify = function (title, theBody, theIcon ) {
 
@@ -12,18 +13,22 @@ myApp.controller('mainCtrl', function($scope, $interval) {
         icon: theIcon || $scope.icon
       };
 
+      $scope.notification = function () {
+        return new Notification(title || $scope.title, $scope.options);
+      };
+
       if (!("Notification" in window)){
         alert("your browser doesn't support html5 notifications! please update your browser!");
 
       }else if(Notification.permission === 'granted'){
 
-        $scope.notification = new Notification(title || $scope.title, $scope.options);
+        $scope.notification();
         $scope.notificationStatus = 'granted';
 
       }else if(Notification.permission !== 'denied'){
           Notification.requestPermission(function (permission) {
             if(permission === 'granted'){
-              $scope.notification = new Notification( title || $scope.title, $scope.options);
+              $scope.notification();
               $scope.notificationStatus = 'granted';
 
             }
@@ -35,7 +40,7 @@ myApp.controller('mainCtrl', function($scope, $interval) {
       $scope.notification.onclick = function () {
         window.open( theIcon || $scope.icon , 'notification_image');
       };
-    
+
     };
 
     $scope.runInterval = function () {
