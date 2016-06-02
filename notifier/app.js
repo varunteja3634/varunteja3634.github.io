@@ -5,6 +5,7 @@ myApp.controller('mainCtrl', function($scope, $interval) {
 
     $scope.notificationStatus = '';
     $scope.date = new Date();
+    $scope.intervalRunning = false;
 
     $scope.notify = function (title, theBody, theIcon ) {
 
@@ -13,22 +14,18 @@ myApp.controller('mainCtrl', function($scope, $interval) {
         icon: theIcon || $scope.icon
       };
 
-      $scope.notification = function () {
-        return new Notification(title || $scope.title, $scope.options);
-      };
-
       if (!("Notification" in window)){
         alert("your browser doesn't support html5 notifications! please update your browser!");
 
       }else if(Notification.permission === 'granted'){
 
-        $scope.notification();
+        $scope.notification =  new Notification(title || $scope.title, $scope.options);
         $scope.notificationStatus = 'granted';
 
       }else if(Notification.permission !== 'denied'){
           Notification.requestPermission(function (permission) {
             if(permission === 'granted'){
-              $scope.notification();
+              $scope.notification =  new Notification(title || $scope.title, $scope.options);
               $scope.notificationStatus = 'granted';
 
             }
@@ -46,10 +43,18 @@ myApp.controller('mainCtrl', function($scope, $interval) {
     $scope.runInterval = function () {
 
       alert("you'll get notifications with random images! stay tuned!");
-      $interval(function () {
-        $scope.notify('Tring Tring!!', "Here's a random picture for you! with ❤️ from interval!", 'http://loremflickr.com/320/240/dog');
+      $scope.notificationInterval = $interval(function () {
+        $scope.notify('Tring Tring!!', "Here's a random picture of " + $scope.search + " for you! with ❤️ from interval!", 'http://loremflickr.com/320/240/' + $scope.search + '/all');
       }, 10000, 50);
 
+      $scope.intervalRunning = true;
+    };
+
+    $scope.cancelInterval = function () {
+      $interval.cancel($scope.notificationInterval);
+      console.log("interval is canceled!");
+      alert("all automatic notifications have been aborted!!");
+      $scope.intervalRunning = false;
     };
 
 });
