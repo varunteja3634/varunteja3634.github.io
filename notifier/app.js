@@ -7,7 +7,18 @@ myApp.controller('mainCtrl', function($scope, $interval) {
     $scope.date = new Date();
     $scope.intervalRunning = false;
 
+    $scope.checkIconUrl = function () {
+
+      if (!($scope.search === "" || $scope.search === undefined)) {
+          $scope.icon = 'http://loremflickr.com/320/240/' + $scope.search + '/all';
+      } else {
+        $scope.icon = 'http://loremflickr.com/320/240/cat/all';
+      }
+    };
+
     $scope.notify = function (title, theBody, theIcon ) {
+
+      $scope.checkIconUrl();
 
       $scope.options = {
         body: theBody || $scope.body,
