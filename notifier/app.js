@@ -36,7 +36,7 @@ myApp.controller('mainCtrl', function($scope, $interval) {
       }else if(Notification.permission !== 'denied'){
           Notification.requestPermission(function (permission) {
             if(permission === 'granted'){
-              $scope.notification =  new Notification(title || $scope.title, $scope.options);
+              $scope.notification =  new Notification($scope.title || title, $scope.options);
               $scope.notificationStatus = 'granted';
 
             }
