@@ -21,8 +21,8 @@ myApp.controller('mainCtrl', function($scope, $interval) {
       $scope.checkIconUrl();
 
       $scope.options = {
-        body: theBody || $scope.body,
-        icon: theIcon || $scope.icon
+        body: $scope.body || theBody,
+        icon: $scope.icon || theIcon
       };
 
       if (!("Notification" in window)){
